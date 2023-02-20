@@ -1,0 +1,52 @@
+﻿@using MyPhotosCatalog.Models;
+@model Photo
+@{
+    ViewBag.Title = "Add";
+}
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col">
+    <div class="row text-center">
+        <h1>Add New Photo</h1>
+    </div>
+    <form asp-action="Add" enctype="multipart/form-data" method="post">
+        @Html.ValidationSummary()
+        <div>
+            <label asp-for="Name"></label>
+            <input type="text" asp-for="Name" class="form-control" />
+            <div class="form-text">Max. 40 chars</div>
+            <br />
+        </div>
+            <br />
+        <div>
+            <label asp-for="File"></label>
+            <input type="file" asp-for="File" class="form-control" id="fileInput" data-val="true" data-val-required="Please select a file for the Photo field." required />
+        </div>
+
+        <br />
+        <div>
+            <label asp-for="Owner"></label>
+            <textarea class="form-control" type="text" asp-for="Owner" rows="3"></textarea>
+            <div class="form-text">Max. 20 chars</div>
+            <br />
+        </div>
+        <div>
+            <label asp-for="CategoryId">Category</label>
+            <select class="form-control" asp-for="CategoryId" asp-items="ViewBag.Items"></select>
+            <br />
+        </div>
+        <div>
+            <input class="form-control" type="submit" value="Send"/>
+        </div>
+            </form>
+        </div>
+        <div class="col">
+            <div>
+                <img class="img-thumbnail rounded-3" src="~/Assets/defaultPreview.png" id="preview" />
+                <div class="form-text">A Preview will be shown here</div>
+
+            </div>
+        </div>
+    </div>
+</div>

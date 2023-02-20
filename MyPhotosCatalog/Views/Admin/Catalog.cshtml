@@ -1,0 +1,64 @@
+﻿@using MyPhotosCatalog.Models.ViewModels;
+@using MyPhotosCatalog.Models;
+@model CatalogViewModel
+@{
+    ViewBag.Title = "Catalog";
+}
+<br />
+<div class="container">
+    <div class="row text-center">
+        <h1>Admin Mode</h1>
+    </div>
+    <div class="row text-center">
+        <p>
+            @await Html.PartialAsync("_DropDownList")
+        </p>
+    </div>
+    <div class="row">
+        <a asp-action="Add" class="btn btn-primary">Add New</a>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <h5>Picture</h5>
+        </div>
+        <div class="col-3">
+            <h5>Name</h5>
+        </div>
+        <div class="col-3">
+            <h5>Owner</h5>
+        </div>
+        <div class="col">
+        </div>
+        <div class="col">
+        </div>
+        <hr />
+    </div>
+    @foreach (var photo in (IEnumerable<Photo>)ViewBag.Photos)
+    {
+        if (photo.CategoryId.ToString() == Model.CategoryId || Model.CategoryId == null || Model.CategoryId == "All")
+        {
+            <div class="row">
+                <div class="col-3">
+                    <img class="img-thumbnail rounded-3" src="~/Pics/@photo.PictureName" height="150" width="150">
+                </div>
+                <div class="col-3">
+                    <span>@photo.Name</span>
+                </div>
+                <div class="col-3">
+                    <span>@photo.Owner</span>
+                </div>
+                <div class="col">
+                    <a asp-action="Edit" asp-route-id="@photo.Id" class="btn btn-warning">Edit</a>
+                </div>
+                <div class="col">
+                    <a asp-action="Delete" asp-route-id="@photo.Id" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+@section section1
+    {
+    <script src="~/scripts/dropDownListLogic.js"></script>
+}

@@ -1,0 +1,57 @@
+﻿@using MyPhotosCatalog.Models.ViewModels;
+@using MyPhotosCatalog.Models;
+@model CatalogViewModel
+@{
+    ViewBag.Title = "Catalog";
+}
+
+<br />
+<div class="container">
+    <h1 class="text-center">Our Photos Catalog</h1>
+    <br />
+    <div class="row text-center">
+        @await Html.PartialAsync("_DropDownList")
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-3">
+            <h5>Picture</h5>
+        </div>
+        <div class="col-3">
+            <h5>Name</h5>
+        </div>
+        <div class="col-3">
+            <h5>Category</h5>
+        </div>
+        <div class="col-3">
+            <h5>Find out more and comment(:</h5>
+        </div>
+        <hr>
+    </div>
+    @foreach (var photo in (IEnumerable<Photo>)ViewBag.Photos)
+    {
+        if (photo.CategoryId.ToString() == Model.CategoryId || Model.CategoryId == null || Model.CategoryId == "All")
+        {
+            <div class="row">
+                <div class="col-3">
+                    <img class ="img-thumbnail rounded-3" src="~/Pics/@photo.PictureName">
+                </div>
+                <div class="col-3">
+                    <span>@Html.DisplayFor(_ => photo.Name)</span>
+                </div>
+                <div class="col-3">
+                   <span>@photo.Category!.Name</span> 
+                </div>
+                <div class="col-3">
+                    <a class="btn btn-info" asp-action="Details" asp-route-id1="@photo.Id">Details</a>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+
+@section section1
+    {
+    <script src="~/scripts/dropDownListLogic.js"></script>
+}

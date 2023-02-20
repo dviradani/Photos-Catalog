@@ -1,0 +1,73 @@
+﻿@using MyPhotosCatalog.Models;
+@model Comment
+@{
+    ViewBag.Title = $"Details About {ViewBag.Photo.Name}";
+}
+<br />
+<div class="container">
+    <div class="row text-center">
+        <h1>Details About <span class="text-muted">@ViewBag.Photo.Name</span></h1>
+        <br />
+    </div>
+    <div class="row text-center">
+
+        <div class="col-2">
+            <img class="img-thumbnail rounded-3" src="~/Pics/@ViewBag.Photo.PictureName" width="200" height="200">
+        </div>
+        <div class="col"></div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            Name
+        </div>
+        <div class="col-2 lead">
+            @ViewBag.Photo.Name
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            Owner
+        </div>
+        <div class="col-2 lead">
+            @ViewBag.Photo.Owner
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            Category
+        </div>
+        <div class="col-2 lead">
+            @ViewBag.Photo.Category!.Name
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        @if (@ViewBag.Photo.Comments != null && @ViewBag.Photo.Comments.Count != 0)
+        {
+            <details open>
+                <summary><bold class="h5">Comments</bold></summary>
+                @foreach (var comment in @ViewBag.Photo.Comments)
+                {
+                    <p class="lead">
+                        @comment.Content
+                    </p>
+                }
+            </details>
+        }
+        else
+        {
+            <div class="lead">
+                <mark> Be the first to leave a comment (:</mark>
+            </div>
+        }
+        <div class="row">
+            <h4>Leave A Comment</h4>
+            <form asp-action="Details" method="post">
+                @Html.ValidationSummary()
+                <input type="number" asp-for="PhotoId" value="@ViewBag.Photo.Id" hidden />
+                @Html.EditorFor(m => m.Content)
+                <input type="submit" value="Send" />
+            </form>
+        </div>
+    </div>
+</div>

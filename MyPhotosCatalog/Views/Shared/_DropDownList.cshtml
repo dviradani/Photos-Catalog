@@ -1,0 +1,7 @@
+﻿@using MyPhotosCatalog.Models.ViewModels;
+@model CatalogViewModel
+<form asp-action="Catalog" method="post">
+    Please Select a Category:  <select asp-for="CategoryId" asp-items="@((List<SelectListItem>)ViewBag.Items)"></select>
+</form>
+<script src="~/scripts/dropDownListLogic.js"></script>
+

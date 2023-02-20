@@ -1,0 +1,78 @@
+﻿@using MyPhotosCatalog.Models;
+@model Photo
+@{
+    ViewBag.Title = $"Edit Details For {Model.Name}";
+}
+<style>
+    #trashIcon {
+        width: 1rem;
+        opacity: 1;
+    }
+
+        #trashIcon:hover {
+            opacity: 0.5;
+        }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Edit Details For <span class="text-muted">@Model.Name</span></h1>
+            <form asp-action="Edit" enctype="multipart/form-data" method="post">
+                @Html.ValidationSummary()
+                <label asp-for="Name"></label>
+                <input class="form-control" type="text" asp-for="Name" value="@Model.Name" />
+                <div class="form-text">Max. 40 chars</div>
+                <br /><br />
+
+                <br /><br />
+                <label asp-for="File"></label>
+                @*באתר יתאפשר לשנות תמונה רק לדוגמאות שלא היו בדוג' הראשונית*@
+                @if (Model.Id > 8)
+                {
+                    <input type="file" asp-for="File" id="fileInput" class="form-control" />
+                }
+                else
+                {
+                    <input type="file" asp-for="File" value="@Model.File" class="form-control" disabled />
+                    <div class="form-text">Disabled as this is only an initial example. Try with a new photo</div>
+                }
+                <input type="text" asp-for="PictureName" value="@Model.PictureName" hidden />
+                <br /><br />
+                <label asp-for="Owner"></label>
+                <textarea class="form-control" rows="3" asp-for="Owner" value="@Model.Owner"></textarea>
+                <div class="form-text">Max. 20 chars</div>
+                <br /><br />
+                <label asp-for="CategoryId">Category</label>
+                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Items"></select>
+                <br /><br />
+                <input type="submit" class="form-control" value="Send" />
+            </form>
+        </div>
+        <div class="col">
+            <img class="img-thumbnail rounded-3" src="~/Pics/@Model.PictureName" id="preview">
+            <div class="row">
+                @if (Model.Comments != null && @Model.Comments.Count != 0)
+                {
+                    <details open>
+                        <summary><bold class="h5">Comments</bold></summary>
+                        @foreach (var comment in Model.Comments)
+                        {
+                            <p class="lead">
+                                @comment.Content <a asp-action="DeleteComment" asp-route-id="@comment.Id"><img id="trashIcon" src="~/Assets/trash.png" alt="remove" /></a>
+                            </p>
+                        }
+                    </details>
+                }
+                else
+                {
+                    <div class="lead">
+                        <mark> No Comments Yet</mark>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

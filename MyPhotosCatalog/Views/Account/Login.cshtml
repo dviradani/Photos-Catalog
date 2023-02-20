@@ -1,0 +1,29 @@
+﻿@using MyPhotosCatalog.Models.ViewModels
+@model LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+<br />
+<div class="container">
+    <div class="row text-center">
+        <h1>Login</h1>
+    </div>
+    <div class="row text-center">
+        <div class="col"></div>
+        <div class="col">
+
+            <form asp-action="Login" method="post">
+                @Html.ValidationSummary()
+                <label asp-for="Username" class="form-label"></label>
+                <input type="text" asp-for="Username" class="form-control col-4" />
+                <br />
+                <label asp-for="Password" class="form-label"></label>
+                <input type="password" asp-for="Password" class="form-control" />
+                <div class="form-text">username= dvirad ;password= 123qwe!@@#QWE</div>
+                <br />
+                <input type="submit" value="Connect" class="btn btn-success"/>
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
