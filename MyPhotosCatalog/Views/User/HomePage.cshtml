@@ -1,7 +1,7 @@
 ﻿@using MyPhotosCatalog.Models;
 @model List<Photo>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Welcome To My Catalog :)";
 }
 
 
@@ -32,7 +32,7 @@
             <div class="col-lg-6 col-md-8 mx-auto">
                 <h1 class="fw-light">Welcome To My Catalog :)</h1>
                 <p class="lead text-muted">
-                    My name is Dvir Adani , and this is the first version of my first website.
+                    <mark>My name is Dvir Adani , and this is the first version of my first website.</mark>
 
                 </p>
                 <p>
@@ -45,6 +45,8 @@
 
     <div class="album py-5 bg-light">
         <div class="container">
+            <div class="row text-center"><h3>Most Popular Photos:</h3><h4>(sorted by the number of comments)</h4></div>
+            <br />
             @{
                 int counter = 0;
                 @for (int i = 0; i < 3; i++)
@@ -52,24 +54,27 @@
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                     @for (int j = 0; j < 3; j++)
                     {
-                        <div class="col">
-                            <div class="card shadow-sm">
-                                <img class="bd-placeholder-img card-img-top" width="100%" height="300" src="~/Pics/@Model[counter].PictureName">
-                                <div class="card-body">
-                                    <p class="card-text">@Model[counter].Name</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="btn-group">
-                                            <a type="button" asp-action="Details" asp-route-id1="@Model[counter].Id" class="btn btn-sm btn-outline-secondary">View</a>
-@*                                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                            while (Model.Count > counter)
+                            {
+                                <div class="col">
+                                    <div class="card shadow-sm">
+                                        <img class="bd-placeholder-img card-img-top" width="100%" height="300" src="~/Pics/@Model[counter].PictureName">
+                                        <div class="card-body">
+                                            <p class="card-text">@Model[counter].Name</p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="btn-group">
+                                                    <a type="button" asp-action="Details" asp-route-id1="@Model[counter].Id" class="btn btn-sm btn-outline-secondary">View</a>
+                                                    @*                                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
 *@                                        </div>
-                                            <small class="text-muted"><b>@Model[counter].Owner</b></small>
-                                            <small class="text-muted">@Model[counter].Comments!.Count comments</small>
+                                                <small class="text-muted"><b>@Model[counter].Owner</b></small>
+                                                <small class="text-muted">@Model[counter].Comments!.Count comments</small>
+                                            </div>
+                                            <input type="hidden" value="@(counter++)">
+                                        </div>
                                     </div>
-                                    <input type="hidden" value="@(counter++)">
                                 </div>
-                            </div>
-                        </div>
-                    }
+                            }
+                        }
                 </div>
                 <br />
             }

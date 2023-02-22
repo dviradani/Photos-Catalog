@@ -27,7 +27,7 @@
                 <br /><br />
                 <label asp-for="File"></label>
                 @*באתר יתאפשר לשנות תמונה רק לדוגמאות שלא היו בדוג' הראשונית*@
-                @if (Model.Id > 8)
+                @if (Model.Id > 9)
                 {
                     <input type="file" asp-for="File" id="fileInput" class="form-control" />
                 }

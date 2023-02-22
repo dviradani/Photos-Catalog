@@ -135,7 +135,7 @@ namespace MyPhotosCatalog.Controllers
             var animal = _repository.GetPhoto(id);
             var fullPath = Environment.CurrentDirectory + "\\wwwroot\\Pics\\" + animal.PictureName;
 
-            if (System.IO.File.Exists(fullPath) && id > 8)
+            if (System.IO.File.Exists(fullPath) && id > 9)
             {
                 try
                 {
